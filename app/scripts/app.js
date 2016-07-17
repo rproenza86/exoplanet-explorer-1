@@ -1,9 +1,8 @@
 /*
-Instructions:
-(1) Use Promise.all to refactor the .map code by passing Promise.all an array of Promises.
-  (a) Each Promise will be executed in parallel.
-  (b) The return values will be returned in the same order as the Promises were created.
-Hint: you'll probably still need to use .map.
+Challenge:
+
+Use what you've learned about Promises to request thumbnails in parallel but create them in the
+proper order even if all the requests haven't finished.
  */
 
 // Inline configuration for jshint below. Prevents `gulp jshint` from failing with quiz starter code.
@@ -59,7 +58,7 @@ Hint: you'll probably still need to use .map.
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
     /*
-    Refactor this code with Promise.all!
+    Your code goes here!
      */
     getJSON('../data/earth-like-results.json')
     .then(function(response) {
@@ -77,6 +76,5 @@ Hint: you'll probably still need to use .map.
     .catch(function(e) {
       console.log(e);
     });
-
   });
 })(document);
