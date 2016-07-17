@@ -67,10 +67,12 @@ Hint: you'll probably still need to use .map.
 
       addSearchHeader(response.query);
 
-      response.results.map(function (url) {
-        getJSON(url)
-        .then(createPlanetThumb);
-      });
+      return Promise.all(response.results.map(getJSON));
+    })
+    .then(function (planetsData) {
+      planetsData.forEach(function (planet) {
+        createPlanetThumb(planet);
+      })
     })
     .catch(function(e) {
       console.log(e);
