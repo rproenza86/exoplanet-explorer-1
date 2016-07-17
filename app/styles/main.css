@@ -12,3 +12,6 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+body p{
+  color: blue;
+}
