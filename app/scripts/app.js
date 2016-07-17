@@ -1,8 +1,9 @@
 /*
 Instructions:
-(1) Use .map to fetch all the planets in parallel.
-  (a) Call .map on an array and pass it a function.
-  (b) .map will execute the function against each element in the array immediately.
+(1) Use Promise.all to refactor the .map code by passing Promise.all an array of Promises.
+  (a) Each Promise will be executed in parallel.
+  (b) The return values will be returned in the same order as the Promises were created.
+Hint: you'll probably still need to use .map.
  */
 
 // Inline configuration for jshint below. Prevents `gulp jshint` from failing with quiz starter code.
@@ -58,9 +59,8 @@ Instructions:
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
     /*
-    Your code goes here! Uncomment the next line when you're ready to start!
+    Refactor this code with Promise.all!
      */
-
     getJSON('../data/earth-like-results.json')
     .then(function(response) {
       var sequence = Promise.resolve();
