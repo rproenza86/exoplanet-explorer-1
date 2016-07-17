@@ -67,14 +67,8 @@ Instructions:
 
       addSearchHeader(response.query);
 
-      response.results.forEach(function(url) {
-        //parallel Promise
-        //getJSON(url).then(createPlanetThumb);
-
-        //secuence Promise
-        sequence = sequence.then(function() {
-          return getJSON(url);
-        })
+      response.results.map(function (url) {
+        getJSON(url)
         .then(createPlanetThumb);
       });
     })
