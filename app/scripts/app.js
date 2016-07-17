@@ -57,18 +57,6 @@ Instructions:
     });
   }
 
-
-    /**
-     * Perform an XHR for a JSON and returns a parsed JSON response.
-     * @param  {String} url - The JSON URL to fetch.
-     * @return {Promise}    - A Promise that passes the parsed JSON.
-     */
-    function getJSON(url) {
-      return get(url).then(function(response) {
-            	 return response.json();
-            });
-    }
-
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
 
@@ -81,12 +69,12 @@ Instructions:
     getJSON('../data/earth-like-results.json')
      .then( function (response) {
        addSearchHeader(response.query);
-       console.debug(response);
-       return response.results[0];
+       return getJSON(response.results[2]);
      })
-     .then(function (url) {
-       console.log(url);
-     })
+     .catch(function() {
+       throw Error('Search Request Error');
+      })
+     .then(createPlanetThumb)
      .catch(function (error){
        addSearchHeader('unknown');
        console.log(error);
