@@ -67,18 +67,25 @@ Instructions:
     // getJSON('../data/earth-like-results.json')
 
     getJSON('../data/earth-like-results.json')
-     .then( function (response) {
-       addSearchHeader(response.query);
-       return getJSON(response.results[2]);
-     })
-     .catch(function() {
-       throw Error('Search Request Error');
-      })
-     .then(createPlanetThumb)
-     .catch(function (error){
-       addSearchHeader('unknown');
-       console.log(error);
-     });
+    .then(function(response) {
+      var sequence = Promise.resolve();
+
+      addSearchHeader(response.query);
+
+      response.results.forEach(function(url) {
+        //parallel Promise
+        //getJSON(url).then(createPlanetThumb);
+        
+        //secuence Promise
+        sequence = sequence.then(function() {
+          return getJSON(url);
+        })
+        .then(createPlanetThumb);
+      });
+    })
+    .catch(function(e) {
+      console.log(e);
+    });
 
   });
 })(document);
